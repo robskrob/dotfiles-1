@@ -63,8 +63,25 @@ let g:pymode_python = 'python3'
 
 " Salesforce:
 
-let g:apex_backup_folder = expand("$HOME/code/projects/sfdc/backup")
-let g:apex_temp_folder = expand("$HOME/code/projects/sfdc/temp")
-let g:apex_properties_folder = expand("$HOME/code/projects/sfdc/properties")
-let g:apex_tooling_force_dot_com_path = expand("$HOME/code/projects/sfdc/jar")
+" Examples:
+" let g:apex_backup_folder = expand("$HOME/code/projects/sfdc/backup")
+" let g:apex_temp_folder = expand("$HOME/code/projects/sfdc/temp")
+" let g:apex_properties_folder = expand("$HOME/code/projects/sfdc/properties")
+" let g:apex_tooling_force_dot_com_path = expand("$HOME/code/projects/sfdc/jar")
 
+let g:apex_backup_folder = expand("")
+let g:apex_temp_folder = expand("")
+let g:apex_properties_folder = expand("")
+let g:apex_tooling_force_dot_com_path = expand("")
+
+
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
